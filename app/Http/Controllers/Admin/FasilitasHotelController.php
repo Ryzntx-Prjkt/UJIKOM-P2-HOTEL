@@ -58,7 +58,8 @@ class FasilitasHotelController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = FasilitasHotel::find($id);
+        return view('admin.hotel.fasilitas.show', compact('data'));
     }
 
     /**
@@ -69,7 +70,8 @@ class FasilitasHotelController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = FasilitasHotel::find($id);
+        return view('admin.hotel.fasilitas.edit', compact('data'));
     }
 
     /**
@@ -81,7 +83,16 @@ class FasilitasHotelController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $fasilitas =  FasilitasHotel::find($id)->update(['fasilitas' => $data['fasilitas'], 'deskripsi' => $data['deskripsi']]);
+        if($request->hasFile('foto'))
+        {
+            $path = $request->file('foto')->store('public/files');
+            $fasilitas->foto = $path;
+            $fasilitas->save();
+        }
+        Alert::toast('Data fasilitas hotel berhasil ditambahkan!');
+        return redirect()->route('fasilitas-hotel.index');
     }
 
     /**

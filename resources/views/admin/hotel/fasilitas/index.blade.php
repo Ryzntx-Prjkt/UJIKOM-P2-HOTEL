@@ -43,7 +43,7 @@
                             <td>
                                 <div class="row">
                                     <div class="col-2">
-                                            <a href="{{route('kamar.show', $item->id)}}" class="btn btn-primary "><li class="fa fa-eye"></li></a>
+                                            <a href="{{route('fasilitas-hotel.show', $item->id)}}" class="btn btn-primary "><li class="fa fa-eye"></li></a>
                                         </div>
                                 <form action="{{route('fasilitas-hotel.destroy', $item->id)}}" class="col-1" method="post">
                                     @method('delete')
